@@ -1,0 +1,38 @@
+------------------------ 1x1 ----------------------
+0.4 = 61
+-1.0 = 16
+1.1 = 239
+1.7 = 238
+0.8 = 1
+-2.1 = 1
+-0.4 = 18
+
+Possible Ways to reduce 1x1:
+
+1. Focus only on the base pairs for the loop, as given the ibp and cbp the values do not change with unpaired bases much.
+2. focus only on closing base pair, as parameters for a specific closing base pair are very similar. We can use normal distribution with mean = highest frequency , and a small std dev.
+3. Focus only on values with 1.1 & 1.7 kcal/mol as they constitute the bulk of the params.
+ 
+ ---------------------- 1x2 ------------------------
+ Again vals are highly discrete, most frequent ones are:
+ Total = 2304
+ 5.5 = 608
+ 4.8 = 608
+ 2.5 = 73
+ 3.3 = 32
+ 2.5 = 73
+ 3.0 = 128
+ 4.0 = 128
+ 
+1. Unpaired bases do have a noticeable effect on params regardless of same ibp and cbp 
+2. Use a small code/script to find buckets:
+0 - 1.0 = 17
+1.0 - 2.0 = 130
+2.0 - 3.0 = 294
+3.0 - 4.0 = 464
+4.0 - 5.0 = 791
+5.0 - 6.0 = 608
+
+Can separate into finer grained buckets
+
+------------------------------------------------------

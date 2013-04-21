@@ -1,0 +1,3 @@
+
+Usability & Specify Options:
+1. When selecting any combination of bases, we can enter even less than 2 bases. That is if only 'a' is entered in this option say for closing bp, the algorithm matches all closing bp's which have an 'a' in them at any position.

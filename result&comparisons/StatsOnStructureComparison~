@@ -1,0 +1,23 @@
+------------------------------------
+LOCUS       X62859                   126 bp    DNA     linear   BCT 06-JUN-2003
+DEFINITION  M.formicicum 5S ribosomal RNA.
+ACCESSION   X62859
+VERSION     X62859.1  GI:44270
+KEYWORDS    5S ribosomal RNA.
+SOURCE      Methanobacterium formicicum
+
+MFE Acc : 0.602
+
+----------------------------
+LOCUS       NRU93061                1029 bp    DNA     linear   MAM 11-JUN-1997
+DEFINITION  Nyctimene robinsoni 12S ribosomal RNA gene, partial sequence, and
+            tRNA-Val gene, complete sequence, mitochondrial genes encoding
+            mitochondrial RNAs.
+ACCESSION   U93061
+VERSION     U93061.1  GI:1929004
+KEYWORDS    .
+SOURCE      mitochondrion Nyctimene robinsoni (Queensland tube-nosed fruit bat)
+ORGANISM  Nyctimene robinsoni
+
+MFE Acc : 0.447
+
