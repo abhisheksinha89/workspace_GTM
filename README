@@ -1,3 +1,39 @@
+--------------- Installing GTModify ----------------
+1. Download and extract GTModify.zip which gives a folder GTModify
+2. Open terminal -> go to GTModify folder.
+3. >>make
+4. Code is now compiled.
+5. Now run simply by typing ./GTModify everytime
+ 
+Integrating GTModify with GTFold 
+//Recommended but not required for below questions
+1. Permanent way:
+Open your ~/.bashrc file -> add the following line
+>>export GTMODIFYRUNPATH=full path where the GTfold binary resides, for example in my computer it is:
+>>export GTMODIFYRUNPATH=/home/abhishek/Desktop/gtfold/bin
+2. Temporary way:
+Simply type in your terminal
+>>export GTMODIFYRUNPATH=full path where the GTfold binary resides
 
-Usability & Specify Options:
-1. When selecting any combination of bases, we can enter even less than 2 bases. That is if only 'a' is entered in this option say for closing bp, the algorithm matches all closing bp's which have an 'a' in them at any position.
+----------QUESTIONS to try out ----------------
+Requirement: Each question should be (and can be) performed in a single query. 
+
+Q1. Modify all internal 1x1 parameter values to contain 0
+Q2. Modify all stack energies where closing Base Pair (cbp) can be anything and interior base pair is specified as 'ax'. Values should be made to -2.0
+Q3. Modify internal 2x2 parameters, where closing base pair contains a 'c', interior base pair contains 'au' in any order, the unpaired bases should contain X1 = 'c', Y1 = 'g' and X2 and Y2 can be anything. Modify parameters to contain values from normal distribution with mean = 10 and std dev = 1
+Q4. Modify terminal mismatch parameters for hairpin loops, where cbp should contain c,g in any order, and the terminal mismatch nucleotides can be anything. Values should be sampled from a uniform distribution with upper bound as 5.0 and lower bound as 1.
+Q5. Modify internal 2x1 parameters where closing base pair is specified as 'gc' and the interior base pair and unpaired nucleotides can be anything. Values should be made as -1.5. 
+Q6. Modify Dangle parameters with any closing base pair, and with X2 = a, values are displaced by -0.5
+(Hint: read the prompt carefully, the usage for specifying X2 is slightly different as dangle parameters can either be X1 or X2 but never both) 
+
+--------------------------------------
+
+Jargon:
+
+		X1	Y1	
+5'-- 	B1			B11   -- 3'
+
+3'-- 	B2			B22   -- 5'
+		X2	Y2
+	
+B1, B2 denote closing base pairs, B11 B22 denote interior base pair(if applicable), X1 X2 Y1 Y2 denoted unpaired bases in the positions indicated(if applicable) 
