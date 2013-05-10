@@ -153,13 +153,19 @@ void computeFunction()
 
 void readCategory()
 {
-	cout<< ">>Categories:\n>>(length) : modify hairpin/bulge/internal energies based on length of loop\n>>(misc) : modify tetraloop and other miscellaneous energies\n>>(internal) : modify 1x1 2x1 2x2 internal loop energies\n>>(stack) : modify stack energies\n>>(terminal) : modify terminal mismatch energies for hairpin and internal loops\n>>(dangle) : modify dangling energies\n\n";
+	cout<< ">>Categories:\n>>(length) : modify hairpin/bulge/internal energies based on length of loop\n>>(misc) : modify tetraloop and other miscellaneous energies\n>>(internal) : modify 1x1 2x1 2x2 internal loop energies\n>>(stack) : modify stack energies\n>>(terminal) : modify terminal mismatch energies for hairpin and internal loops\n>>(dangle) : modify dangling energies\n>>(value): modify value based params (Beta Version)\n\n";
 	cout<<">>Enter category to Modify: ";
 	cin >> category;
 	
 	if (category == "length")
 	{
 		lengthBasedModule();
+		return;
+	}
+	
+	else if (category == "value")
+	{
+		valueModule();
 		return;
 	}
 	

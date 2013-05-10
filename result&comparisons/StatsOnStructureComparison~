@@ -21,3 +21,12 @@ ORGANISM  Nyctimene robinsoni
 
 MFE Acc : 0.447
 
+---------------------------
+LOCUS       AF118143                1314 bp    DNA     linear   PLN 31-MAR-1999
+DEFINITION  Encephalitozoon hellem strain IPZ:CH-H2 small subunit ribosomal RNA
+            gene, complete sequence.
+ACCESSION   AF118143
+
+MFE Acc : 0.206
+
+---------------------------

@@ -141,6 +141,7 @@ extern void internalModule();
 extern void module1x1();
 extern void module2x1();
 extern void module2x2();
+extern void valueModule();
 extern int saveArraysToPath(std::string);
 extern int loadArraysFromPath(std::string);
 extern void loadInt22(std::string);

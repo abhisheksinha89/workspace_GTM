@@ -860,6 +860,7 @@ void stackModule()
 	fileLog("stack_module",option,closingBasePairOption,"",XYOption,queryBasePair,queryXY,"",valOption,val,mean,stdev,param1,param2,modCount);	
 }
 
+
 void helperTerminalModule(string callerOption)
 {
 
@@ -2598,3 +2599,82 @@ void module2x2()
 	//cout <<"\n---------------------" <<iarray[0][0].X1 << iarray[0][0].X2<<iarray[0][0].Y1<<iarray[0][0].Y2<<"-------------\n";
 
 }
+
+void valueModuleHelper(string fileOption, float upper, float lower, float val)
+{
+	int lines = 0, cols = 0, modCount = 0;
+	if(fileOption == "1x1")
+	{
+		lines = LINES_INT11; cols = COLS_INT11;
+	}
+	else if(fileOption == "1x2")
+	{
+		lines = LINES_INT21; cols = COLS_INT21;
+	}
+	else if (fileOption == "2x2")
+	{
+		 lines = LINES_INT22; cols = COLS_INT22;
+	}
+
+	for (int i = 0; i<lines; i++)
+	{
+		for(int j = 0; j<cols; j++)
+		{
+			if(fileOption == "1x1")
+			{
+				if(int11[i][j] >= lower && int11[i][j] <= upper)
+				{
+					int11[i][j] = val;
+					modCount++;
+				}
+			}
+			else if(fileOption == "1x2")
+			{
+				if(int21[i][j] >= lower && int21[i][j] <= upper)
+				{
+					int21[i][j] = val;
+					modCount++;
+				}
+
+			}
+			else if(fileOption == "2x2")
+			{
+				if(int22[i][j] >= lower && int22[i][j] <= upper)
+				{
+					int22[i][j] = val;
+					modCount++;
+				}
+
+			}
+		}
+	}
+	cout<<">>Vals Modified: "<<modCount<<"\n";
+}
+
+void valueModule()
+{
+	string fileOption;
+	cout<< ">>Enter 1x1 or 1x2 or 2x2: ";
+	cin >> fileOption;
+	float upper = 0, lower = 0, val=0;
+	int proceed = 1;
+	while (proceed)
+	{
+		cout << ">>Upper (space) Lower (space) newValue: ";
+		cin >> upper >> lower >> val;
+		if(fileOption == "1x1")
+			valueModuleHelper("1x1",upper, lower, val);
+		else if(fileOption == "1x2")
+			valueModuleHelper("1x2",upper, lower, val);
+		else if(fileOption == "2x2")
+			valueModuleHelper("2x2",upper, lower, val);
+		else
+		{
+			cout<<">>Invalid Option\n";
+			return;
+		}
+		cout<<">>Continue? (0 or 1): ";
+		cin >> proceed;
+	}
+}
+
