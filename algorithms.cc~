@@ -5,7 +5,7 @@ default_random_engine generator(RANDOMSEED);
 
 void log(char B1, char B2, char B11, char B22, char X1, char X2, char Y1, char Y2)
 {
-	//log info
+	//log info 
 	if(B1 != '0' && B2 != '0')
 	{
 		fprintf(stderr,"\nModifying -> Closing bp: [%c%c]; ",B1,B2);
@@ -52,7 +52,7 @@ float uniformDistributionNumberGenerator(float a, float b)
 
 float normalDistributionNumberGenerator(float mean, float stdev)
 {
-
+	
 	normal_distribution<float> dist(mean, stdev);
 	float retval = dist(generator);
 	return retval;
@@ -96,7 +96,7 @@ void lengthBasedModule()
 				sprintf(numBuff,"%f %f",param1,param2);
 				logstr = logstr + " upper lower:"+numBuff;
 			}
-
+			
 			else if(valOption == "a" || valOption == "d")
 			{
 				cout<<"\n>>Val: ";
@@ -105,7 +105,7 @@ void lengthBasedModule()
 				logstr = logstr + " val:"+numBuff;
 			}
 			else
-			{
+			{	
 				cout << "\n>>Invalid valOption";
 				break;
 			}
@@ -120,7 +120,7 @@ void lengthBasedModule()
 				{
 					//keep backup for undo
 					loop_ORIG[len-1][1] = loop[len-1][1];
-					if(valOption == "a")
+					if(valOption == "a")	
 					loop[len - 1][1] = val;
 					else if(valOption == "d")
 					loop[len - 1][1] += val;
@@ -186,13 +186,13 @@ void lengthBasedModule()
 					}
 
 				}
-
+				
 			}
 			fileLog(logstr);	//log the query
 			logstr = "<length_module> ";	//make logstr empty for next log cycle
 		}
 	}
-
+	
 
 	else
 	{
@@ -206,7 +206,7 @@ void lengthBasedModule()
 void dangleModule()
 {
 	HelperDangle darray[LINES_DANGLE][COLS_DANGLE];
-
+	
 	//creating array which contains information as to which element in the dangle array corresponds to which nucleotides
 	for(int i=0; i<8; i++)
 	{
@@ -238,7 +238,7 @@ void dangleModule()
 					if(x == 1)
 						darray[i][4*j + x].X = 'c';
 					if(x == 2)
-						darray[i][4*j + x].X = 'g';
+						darray[i][4*j + x].X = 'g';	
 					if(x == 3)
 						darray[i][4*j + x].X = 'u';
 				}
@@ -250,10 +250,10 @@ void dangleModule()
 					if(x == 1)
 						darray[i][4*j + x].Y = 'c';
 					if(x == 2)
-						darray[i][4*j + x].Y = 'g';
+						darray[i][4*j + x].Y = 'g';	
 					if(x == 3)
 						darray[i][4*j + x].Y = 'u';
-
+					
 				}
 			}
 		}
@@ -320,9 +320,9 @@ void dangleModule()
 					dangle[i][j] = uniformDistributionNumberGenerator(param1, param2);
 				}
 			}
-			cout<<"\n>>All values modified";
-		}
-
+			cout<<"\n>>All values modified";	
+		}	
+		
 		else if (option == "d")
 		{
 			//detailed query implementation
@@ -389,7 +389,7 @@ void dangleModule()
 			//start with the algorithm
 			for(int i=0; i<LINES_DANGLE; i++)
 			{
-
+				
 				for(int j = 0; j<COLS_DANGLE; j++)
 				{
 					//backup for UNDO
@@ -397,7 +397,7 @@ void dangleModule()
 					B1 = darray[i][j].B1; B2 = darray[i][j].B2; X1 = darray[i][j].X; X2 = darray[i][j].Y;	//log
 					basePairCount = 0;
 					XYCount = 0;
-
+					
 					if(closingBasePairOption == "c")
 					{
 						if(queryBasePair == "any")
@@ -415,40 +415,40 @@ void dangleModule()
 								{
 									basePairCount += 1;
 									//darray[i][j].B should not be used again
-									darray[i][j].B1 = '1';
+									darray[i][j].B1 = '1';	
 								}
-
+								
 								else if (queryBasePair.c_str()[p] == darray[i][j].B2)
 								{
 									basePairCount += 1;
 									darray[i][j].B2 = '1';
 								}
-
+								
 							}
-						}
+						}	
 					}
-
+					
 					else if(closingBasePairOption == "s")
 					{
 						if(queryBasePair.c_str()[0] == 'x')
 							basePairCount += 1;
-
+						
 						else if(queryBasePair.c_str()[0] == darray[i][j].B1)
 							basePairCount += 1;
-
+						
 						if(queryBasePair.c_str()[1] == 'x')
 							basePairCount += 1;
-
+					
 						else if(queryBasePair.c_str()[1] == darray[i][j].B2)
-							basePairCount += 1;
+							basePairCount += 1;	
 					}
-
+					
 					if(XYOption == "c")
 					{
 						if( queryXY == "any")
 						{
 							XYCount = queryXY.length();
-
+						
 						}
 						else
 						{
@@ -460,16 +460,16 @@ void dangleModule()
 								else if(queryXY.c_str()[p] == darray[i][j].X)
 								{
 									XYCount += 1;
-
+									
 								}
 								else if (queryXY.c_str()[p] == darray[i][j].Y)
 								{
 									XYCount += 1;
 								}
 							}
-						}
+						}	
 					}
-
+					
 					else if(XYOption == "s")
 					{
 						if(queryXY.c_str()[0] == 'x')
@@ -479,9 +479,9 @@ void dangleModule()
 						if(queryXY.c_str()[1] == 'x')
 							XYCount += 1;
 						else if(queryXY.c_str()[1] == darray[i][j].Y)
-							XYCount += 1;
+							XYCount += 1;		
 					}
-
+					
 					if((basePairCount >= queryBasePair.length()) && (XYCount >= queryXY.length()))
 					{
 						log(B1,B2,'0','0',X1,X2,'0','0');
@@ -499,15 +499,15 @@ void dangleModule()
 			}//outer for
 			log(modCount);
 		}
-
-
+		
+	
 		else
 		{
 			cout <<"\n>>Invalid option";
-
+			
 		}
 	//}
-
+	
 	//fileLog the query
 	fileLog("dangle_module",option,closingBasePairOption,"",XYOption,queryBasePair,"",queryXY,valOption,val,mean,stdev,param1,param2,modCount);
 }
@@ -515,9 +515,9 @@ void dangleModule()
 void stackModule()
 {
 	HelperStack sarray[LINES_STACK][COLS_STACK];
-
+	
 	//creating array which contains information as to which element in the stack array corresponds to which nucleotides
-
+	
 	for(int i=0; i<4; i++)
 	{
 		for(int j=0; j<4; j++)
@@ -543,9 +543,9 @@ void stackModule()
 					{
 						sarray[4*i + x][4*j + y].B1 = 'u';
 					}
-
+					
 					//fill B2
-
+					
 					if((4*j + y) < 4)
 					{
 						sarray[4*i + x][4*j + y].B2 = 'a';
@@ -562,7 +562,7 @@ void stackModule()
 					{
 						sarray[4*i + x][4*j + y].B2 = 'u';
 					}
-
+					
 					//fill Y
 					if(y == 0)
 					{
@@ -597,13 +597,13 @@ void stackModule()
 					{
 						sarray[4*i + x][4*j + y].X = 'u';
 					}
-
+					
 				}//end for
 			}//end for
 		}//end for
 	}//end for
 	char B1, B2, B11, B22;	//for log
-	int modCount = 0;
+	int modCount = 0;	
 	string option;
 	string closingBasePairOption;
 	string XYOption;
@@ -666,7 +666,7 @@ void stackModule()
 			cout<<"\n>>Enter upperbound (space) lowerbound: ";
 			cin >> param1 >> param2;
 		}
-
+		
 		else if (valOption == "a" || valOption == "d")
 		{
 			cout<<"\n>>Enter Val: ";
@@ -682,7 +682,7 @@ void stackModule()
 		//start with the algorithm
 		for(int i=0; i<LINES_STACK; i++)
 		{
-
+			
 			for(int j = 0; j<COLS_STACK; j++)
 			{
 				//backup for UNDO
@@ -690,7 +690,7 @@ void stackModule()
 				B1 = sarray[i][j].B1;B2 = sarray[i][j].B2;B11 = sarray[i][j].X;B22 = sarray[i][j].Y;
 				basePairCount = 0;
 				XYCount = 0;
-
+				
 				if(closingBasePairOption == "c")
 				{
 					if(queryBasePair == "any")
@@ -719,7 +719,7 @@ void stackModule()
 						}
 					}
 				}
-
+					
 				else if(closingBasePairOption == "s")
 				{
 					if(queryBasePair.c_str()[0] == 'x')
@@ -739,13 +739,13 @@ void stackModule()
 						basePairCount += 1;
 					}
 				}
-
+				
 				if(XYOption == "c")
 				{
 					if( queryXY == "any")
 					{
 						XYCount = queryXY.length();
-
+					
 					}
 					else
 					{
@@ -758,7 +758,7 @@ void stackModule()
 							{
 								XYCount += 1;
 								sarray[i][j].X = '1';// not used again
-
+								
 							}
 							else if (queryXY.c_str()[p] == sarray[i][j].Y)
 							{
@@ -768,7 +768,7 @@ void stackModule()
 						}
 					}
 				}
-
+				
 				else if(XYOption == "s")
 				{
 					if(queryXY.c_str()[0] == 'x')
@@ -786,9 +786,9 @@ void stackModule()
 					if(queryXY.c_str()[1] == sarray[i][j].Y)
 					{
 						XYCount += 1;
-					}
+					}		
 				}
-
+				
 				if((basePairCount >= queryBasePair.length()) && (XYCount >= queryXY.length()))
 				{
 					//matched then modify value
@@ -808,7 +808,7 @@ void stackModule()
 		}//outer for
 		log(modCount);
 		}
-
+	
 	else if(option == "a")
 	{
 		modCount = 0;
@@ -857,18 +857,32 @@ void stackModule()
 	{
 		return;
 	}
-	fileLog("stack_module",option,closingBasePairOption,"",XYOption,queryBasePair,queryXY,"",valOption,val,mean,stdev,param1,param2,modCount);
+	fileLog("stack_module",option,closingBasePairOption,"",XYOption,queryBasePair,queryXY,"",valOption,val,mean,stdev,param1,param2,modCount);	
 }
 
+void valueModule()
+{
+	string fileOption;
+	cout<< ">>Enter 1x1 or 1x2 or 2x2\n";
+	cin >> fileOption
+	float upper = 0, lower = 0;
+	int proceed = 1;
+	while (proceed)
+	{
+		
+		cout<<">>Continue? (0 or 1): ";
+		cin >> proceed;
+	}
+}
 
 void helperTerminalModule(string callerOption)
 {
 
-
+	
 	HelperStack sarray[LINES_TSTACKI][COLS_TSTACKI];	//TSTACKI and TSTACKH and STACK have the same number of LINES & COLS so can use either
-
+	 
 	//creating array which contains information as to which element in the stack array corresponds to which nucleotides
-
+	
 	for(int i=0; i<4; i++)
 	{
 		for(int j=0; j<4; j++)
@@ -894,9 +908,9 @@ void helperTerminalModule(string callerOption)
 					{
 						sarray[4*i + x][4*j + y].B1 = 'u';
 					}
-
+					
 					//fill B2
-
+					
 					if((4*j + y) < 4)
 					{
 						sarray[4*i + x][4*j + y].B2 = 'a';
@@ -913,7 +927,7 @@ void helperTerminalModule(string callerOption)
 					{
 						sarray[4*i + x][4*j + y].B2 = 'u';
 					}
-
+					
 					//fill Y
 					if(y == 0)
 					{
@@ -948,7 +962,7 @@ void helperTerminalModule(string callerOption)
 					{
 						sarray[4*i + x][4*j + y].X = 'u';
 					}
-
+					
 				}//end for
 			}//end for
 		}//end for
@@ -958,7 +972,7 @@ void helperTerminalModule(string callerOption)
 	char B1,B2,X1,X2;	//log
 	string option;
 	string closingBasePairOption;
-	string XYOption;
+	string XYOption; 
 	string queryBasePair;
 	string queryXY;
 	int basePairCount = 0;
@@ -1033,7 +1047,7 @@ void helperTerminalModule(string callerOption)
 		//start with the algorithm
 		for(int i=0; i<LINES_TSTACKH; i++)
 		{
-
+			
 			for(int j = 0; j<COLS_TSTACKH; j++)
 			{
 				tstackh_ORIG[i][j] = tstackh[i][j];
@@ -1042,7 +1056,7 @@ void helperTerminalModule(string callerOption)
 				B1 = sarray[i][j].B1; B2 = sarray[i][j].B2; X1 = sarray[i][j].X; X2 = sarray[i][j].Y;
 				basePairCount = 0;
 				XYCount = 0;
-
+				
 				if(closingBasePairOption == "c")
 				{
 					if(queryBasePair == "any")
@@ -1071,7 +1085,7 @@ void helperTerminalModule(string callerOption)
 						}
 					}
 				}
-
+					
 				else if(closingBasePairOption == "s")
 				{
 					if(queryBasePair.c_str()[0] == 'x')
@@ -1091,13 +1105,13 @@ void helperTerminalModule(string callerOption)
 						basePairCount += 1;
 					}
 				}
-
+				
 				if(XYOption == "c")
 				{
 					if( queryXY == "any")
 					{
 						XYCount = queryXY.length();
-
+						
 					}
 					else
 					{
@@ -1109,7 +1123,7 @@ void helperTerminalModule(string callerOption)
 							{
 								XYCount += 1;
 								sarray[i][j].X = '1';// not used again
-
+								
 							}
 							else if (queryXY.c_str()[p] == sarray[i][j].Y)
 							{
@@ -1119,7 +1133,7 @@ void helperTerminalModule(string callerOption)
 						}
 					}
 				}
-
+				
 				else if(XYOption == "s")
 				{
 					if(queryXY.c_str()[0] == 'x')
@@ -1137,7 +1151,7 @@ void helperTerminalModule(string callerOption)
 					if(queryXY.c_str()[1] == sarray[i][j].Y)
 					{
 						XYCount += 1;
-					}
+					}	
 				}
 				//end of algorithm, start to match
 				if((basePairCount >= queryBasePair.length()) && (XYCount >= queryXY.length()))
@@ -1174,7 +1188,7 @@ void helperTerminalModule(string callerOption)
 		}//outer for
 		log(modCount);
 	}
-
+	
 	else if(option == "a")
 	{
 		modCount = 0;
@@ -1240,7 +1254,7 @@ void helperTerminalModule(string callerOption)
 		return;
 	}
 	if(callerOption == "h")
-	fileLog("stack->tstackh",option,closingBasePairOption,"",XYOption,queryBasePair,"",queryXY,valOption,val,mean,stdev,param1,param2,modCount);
+	fileLog("stack->tstackh",option,closingBasePairOption,"",XYOption,queryBasePair,"",queryXY,valOption,val,mean,stdev,param1,param2,modCount);	
 	else if(callerOption == "i")
 	fileLog("stack->tstacki",option,closingBasePairOption,"",XYOption,queryBasePair,"",queryXY,valOption,val,mean,stdev,param1,param2,modCount);
 
@@ -1281,7 +1295,7 @@ void miscModule()
 			cin >> tetraloop;
 			if(tetraloop == "0")
 				break;
-
+			
 			if(tetraloop == "a")
 			{
 				cout<<"\n>>Val (a)bsolute (d)isplacement, (n)ormal, (u)niform distribution: ";
@@ -1323,10 +1337,10 @@ void miscModule()
 					else if(valOption == "u")
 					tloop[i] = uniformDistributionNumberGenerator(param1, param2);
 				}
-
+				
 				cout<<"\n>>All values modified";
 			}
-
+		
 			else
 			{
 				for(i=0; i<LINES_TLOOP; i++)
@@ -1368,7 +1382,7 @@ void miscModule()
 					tloop[i] = normalDistributionNumberGenerator(mean, stdev);
 					else if(valOption == "u")
 					tloop[i] = uniformDistributionNumberGenerator(param1, param2);
-					break;
+					break; 
 				}
 			}
 			if(i >= LINES_TLOOP)
@@ -1377,24 +1391,24 @@ void miscModule()
 			}
 			}
 		//do while closing brace
-		string tempstr = "misc->tetraloop";
+		string tempstr = "misc->tetraloop"; 
 		tempstr = tempstr + " tetraloop:"+ tetraloop + " valOption:"+ valOption + " vals:"+ logstr;
 		//string tempstr = "misc->tetraloop"+ " tetraloop:";
 		fileLog(tempstr);
 		}
-
+	
 	}
-
+	
 	else if(option == "m")
 	{
 		cout<<"\n>>Returning";
 	}
-
+	
 	else
 	{
 		cout<<"\n>>Invalid option";
 		return;
-	}
+	}	
 }
 
 void internalModule()
@@ -1437,7 +1451,7 @@ void module1x1()
 					else if(4*i + x < 8)
 					{
 						iarray[4*i + x][4*j + y].B1 = 'c';
-						iarray[4*i + x][4*j + y].B2 = 'g';
+						iarray[4*i + x][4*j + y].B2 = 'g';	
 					}
 					else if(4*i + x < 12)
 					{
@@ -1501,7 +1515,7 @@ void module1x1()
 					else if (1 == y)iarray[4*i + x][4*j + y].Y = 'c';
 					else if (2 == y)iarray[4*i + x][4*j + y].Y = 'g';
 					else if (3 == y)iarray[4*i + x][4*j + y].Y = 'u';
-
+						
 
 				}//end for
 			}//end for
@@ -1611,13 +1625,13 @@ void module1x1()
 			{
 				//backup for undo
 				int11_ORIG[i][j] = int11[i][j];
-
+				
 				//logging
 				B1 = iarray[i][j].B1; B2 = iarray[i][j].B2; B11 = iarray[i][j].B11; B22 = iarray[i][j].B22; X1 = iarray[i][j].X; X2 = iarray[i][j].Y;
 				closingBasePairCount = 0;
 				interiorBasePairCount = 0;
 				XYCount = 0;
-
+				
 				if(closingBasePairOption == "c")
 				{
 					if(closingBasePair == "any")
@@ -1646,11 +1660,11 @@ void module1x1()
 						}
 					}
 				}
-
+				
 				if(closingBasePairOption == "s")
 				{
 					if(closingBasePair.c_str()[0] == 'x')
-						closingBasePairCount += 1;
+						closingBasePairCount += 1;	
 					if(closingBasePair.c_str()[0] == iarray[i][j].B1)
 						closingBasePairCount += 1;
 					if(closingBasePair.c_str()[1] == 'x')
@@ -1658,14 +1672,14 @@ void module1x1()
 					if(closingBasePair.c_str()[1] == iarray[i][j].B2)
 						closingBasePairCount += 1;
 				}
-
+				
 				if(interiorBasePairOption == "c")
 				{
-					if(interiorBasePair == "any")
-					{
+					if(interiorBasePair == "any")	
+					{	
 						interiorBasePairCount = interiorBasePair.length();
 					}
-					else
+					else 
 					{
 						for(int p=0; p<interiorBasePair.length(); p++)
 						{
@@ -1685,7 +1699,7 @@ void module1x1()
 						}
 					}
 				}
-
+				
 				if(interiorBasePairOption == "s")
 				{
 					if(interiorBasePair.c_str()[0] == 'x')
@@ -1697,7 +1711,7 @@ void module1x1()
 					if(interiorBasePair.c_str()[1] == iarray[i][j].B22)
 						interiorBasePairCount += 1;
 				}
-
+				
 				if(XYOption == "c")
 				{
 					if(XY == "any")
@@ -1721,10 +1735,10 @@ void module1x1()
 								XYCount += 1;
 								iarray[i][j].Y = '1';
 							}
-						}
+						}	
 					}
 				}
-
+				
 				if(XYOption == "s")
 				{
 					if(XY.c_str()[0] == 'x')
@@ -1736,7 +1750,7 @@ void module1x1()
 					if(XY.c_str()[1] == iarray[i][j].Y)
 						XYCount += 1;
 				}
-
+			
 				//match
 				if(closingBasePairCount >= closingBasePair.length() && interiorBasePairCount >= interiorBasePair.length() && XYCount >= XY.length())
 				{
@@ -1812,7 +1826,7 @@ void module1x1()
 	}
 
 	fileLog("internal->1x1",option,closingBasePairOption,interiorBasePairOption,XYOption,closingBasePair,interiorBasePair,XY,valOption,val,mean,stdev,param1,param2,modCount);
-
+	
 }
 
 void module2x1()
@@ -1840,14 +1854,14 @@ void module2x1()
 						else if(i == 3){iarray[ri][ci].B1 = 'u'; iarray[ri][ci].B2 = 'a';}
 						else if(i == 4){iarray[ri][ci].B1 = 'g'; iarray[ri][ci].B2 = 'u';}
 						else if(i == 5){iarray[ri][ci].B1 = 'u'; iarray[ri][ci].B2 = 'g';}
-
+						
 						if(j == 0){iarray[ri][ci].B11 = 'a'; iarray[ri][ci].B22 = 'u';}
 						else if(1 == j){iarray[ri][ci].B11 = 'c'; iarray[ri][ci].B22 = 'g';}
 						else if(2 == j){iarray[ri][ci].B11 = 'g'; iarray[ri][ci].B22 = 'c';}
 						else if(3 == j){iarray[ri][ci].B11 = 'u'; iarray[ri][ci].B22 = 'a';}
 						else if(4 == j){iarray[ri][ci].B11 = 'g'; iarray[ri][ci].B22 = 'u';}
 						else if(5 == j){iarray[ri][ci].B11 = 'u'; iarray[ri][ci].B22 = 'g';}
-
+						
 						if(0 == y1){iarray[ri][ci].Y1 = 'a';}
 						else if(1 == y1){iarray[ri][ci].Y1 = 'c';}
 						else if(2 == y1){iarray[ri][ci].Y1 = 'g';}
@@ -1883,15 +1897,15 @@ void module2x1()
 	int closingBasePairCount = 0;
 	int interiorBasePairCount = 0;
 	int XYY1Count = 0;
-
+	
 	cout<<"\n>>Enter (d)etailed query, (a)ll or (0) to go back: ";
-	//if we have varied options for each of the closingBasePair, interiorBasePair, etc implement a single code block which update counts based on the
+	//if we have varied options for each of the closingBasePair, interiorBasePair, etc implement a single code block which update counts based on the 
 	//option selected
 	cin >> option;
 	if(option == "d")
 	{
 		//detailed query
-
+		
 
 		cout<<"\n>>Any (c)ombination of closing base-pair or (s)pecify closing base-pair: ";
 		cin >> closingBasePairOption;
@@ -1990,7 +2004,7 @@ void module2x1()
 					closingBasePairCount = closingBasePair.length();
 					}
 					else
-					{
+					{	
 						for(int p=0; p<closingBasePair.length(); p++)
 						{
 							//handle x
@@ -2010,13 +2024,13 @@ void module2x1()
 							}
 						}
 					}
-
-
+		
+					
 				}
 				else if(closingBasePairOption == "s")
 				{
 					if(closingBasePair.c_str()[0] == 'x')
-						closingBasePairCount += 1;
+						closingBasePairCount += 1;	
 					else if(closingBasePair.c_str()[0] == iarray[i][j].B1)
 						closingBasePairCount += 1;
 					if(closingBasePair.c_str()[1] == 'x')
@@ -2028,11 +2042,11 @@ void module2x1()
 				//start with interior base pair
 				if(interiorBasePairOption == "c")
 				{
-					if(interiorBasePair == "any")
+					if(interiorBasePair == "any")	
 					{
 						interiorBasePairCount = interiorBasePair.length();
 					}
-					else
+					else 
 					{
 						for(int p=0; p<interiorBasePair.length(); p++)
 						{
@@ -2062,7 +2076,7 @@ void module2x1()
 						interiorBasePairCount += 1;
 					else if(interiorBasePair.c_str()[1] == iarray[i][j].B22)
 						interiorBasePairCount += 1;
-
+	
 				}
 				//interior base pair done
 				//start with XYY1
@@ -2112,7 +2126,7 @@ void module2x1()
 					else if(XYY1.c_str()[2] == iarray[i][j].Y1)
 						XYY1Count += 1;
 				}
-
+			
 				if(closingBasePairCount >= closingBasePair.length() && interiorBasePairCount >= interiorBasePair.length() && XYY1Count >= XYY1.length())
 				{
 					//match then update val
@@ -2131,7 +2145,7 @@ void module2x1()
 			}
 		}
 		log(modCount);
-
+		
 	}
 
 	else if(option == "a")
@@ -2218,14 +2232,14 @@ void module2x2()
 					else if(i == 3){iarray[ri][ci].B1 = 'u'; iarray[ri][ci].B2 = 'a';}
 					else if(i == 4){iarray[ri][ci].B1 = 'g'; iarray[ri][ci].B2 = 'u';}
 					else if(i == 5){iarray[ri][ci].B1 = 'u'; iarray[ri][ci].B2 = 'g';}
-
+				
 					if(j == 0){iarray[ri][ci].B11 = 'a'; iarray[ri][ci].B22 = 'u';}
 					else if(j == 1){iarray[ri][ci].B11 = 'c'; iarray[ri][ci].B22 = 'g';}
 					else if(j == 2){iarray[ri][ci].B11 = 'g'; iarray[ri][ci].B22 = 'c';}
 					else if(j == 3){iarray[ri][ci].B11 = 'u'; iarray[ri][ci].B22 = 'a';}
 					else if(j == 4){iarray[ri][ci].B11 = 'g'; iarray[ri][ci].B22 = 'u';}
 					else if(j == 5){iarray[ri][ci].B11 = 'u'; iarray[ri][ci].B22 = 'g';}
-
+					
 					if(x == 0){iarray[ri][ci].X1 = 'a'; iarray[ri][ci].X2 = 'a';}
 					else if(x == 1){iarray[ri][ci].X1 = 'a'; iarray[ri][ci].X2 = 'c';}
 					else if(x == 2){iarray[ri][ci].X1 = 'a'; iarray[ri][ci].X2 = 'g';}
@@ -2242,7 +2256,7 @@ void module2x2()
 					else if(13 == x){iarray[ri][ci].X1 = 'u'; iarray[ri][ci].X2 = 'c';}
 					else if(14 == x){iarray[ri][ci].X1 = 'u'; iarray[ri][ci].X2 = 'g';}
 					else if(15 == x){iarray[ri][ci].X1 = 'u'; iarray[ri][ci].X2 = 'u';}
-
+				
 					if(0 == y){iarray[ri][ci].Y1 = 'a'; iarray[ri][ci].Y2 = 'a';}
 					else if(y == 1){iarray[ri][ci].Y1 = 'a'; iarray[ri][ci].Y2 = 'c';}
 					else if(y == 2){iarray[ri][ci].Y1 = 'a'; iarray[ri][ci].Y2 = 'g';}
@@ -2281,15 +2295,15 @@ void module2x2()
 	int closingBasePairCount = 0;
 	int interiorBasePairCount = 0;
 	int XYCount = 0;
-
+	
 	cout<<"\n>>Enter (d)etailed query, (a)ll or (0) to go back: ";
-	//if we have varied options for each of the closingBasePair, interiorBasePair, etc implement a single code block which update counts based on the
+	//if we have varied options for each of the closingBasePair, interiorBasePair, etc implement a single code block which update counts based on the 
 	//option selected
 	cin >> option;
 	if(option == "d")
 	{
 		//detailed query
-
+		
 
 		cout<<"\n>>Any (c)ombination of closing base-pair or (s)pecify closing base-pair: ";
 		cin >> closingBasePairOption;
@@ -2388,7 +2402,7 @@ void module2x2()
 					closingBasePairCount = closingBasePair.length();
 					}
 					else
-					{
+					{	
 						for(int p=0; p<closingBasePair.length(); p++)
 						{
 							if(closingBasePair.c_str()[p] == 'x')
@@ -2407,13 +2421,13 @@ void module2x2()
 							}
 						}
 					}
-
-
+		
+					
 				}
 				else if(closingBasePairOption == "s")
 				{
 					if(closingBasePair.c_str()[0] == 'x')
-						closingBasePairCount += 1;
+						closingBasePairCount += 1;	
 					else if(closingBasePair.c_str()[0] == iarray[i][j].B1)
 						closingBasePairCount += 1;
 					if(closingBasePair.c_str()[1] == 'x')
@@ -2425,11 +2439,11 @@ void module2x2()
 				//start with interior base pair
 				if(interiorBasePairOption == "c")
 				{
-					if(interiorBasePair == "any")
+					if(interiorBasePair == "any")	
 					{
 						interiorBasePairCount = interiorBasePair.length();
 					}
-					else
+					else 
 					{
 						for(int p=0; p<interiorBasePair.length(); p++)
 						{
@@ -2460,7 +2474,7 @@ void module2x2()
 						interiorBasePairCount += 1;
 					else if(interiorBasePair.c_str()[1] == iarray[i][j].B22)
 						interiorBasePairCount += 1;
-
+	
 				}
 				//interior base pair done
 				//start with XYY1
@@ -2518,7 +2532,7 @@ void module2x2()
 					else if(XY.c_str()[3] == iarray[i][j].Y2)
 						XYCount += 1;
 				}
-
+			
 				if(closingBasePairCount >= closingBasePair.length() && interiorBasePairCount >= interiorBasePair.length() && XYCount >= XY.length())
 				{
 					//match then update val
@@ -2535,10 +2549,10 @@ void module2x2()
 					modCount++;
 				}
 			}
-
+	
 		}
 		log(modCount);
-
+		
 	}
 	else if(option == "a")
 	{
@@ -2599,82 +2613,3 @@ void module2x2()
 	//cout <<"\n---------------------" <<iarray[0][0].X1 << iarray[0][0].X2<<iarray[0][0].Y1<<iarray[0][0].Y2<<"-------------\n";
 
 }
-
-void valueModuleHelper(string fileOption, float upper, float lower, float val)
-{
-	int lines = 0, cols = 0, modCount = 0;
-	if(fileOption == "1x1")
-	{
-		lines = LINES_INT11; cols = COLS_INT11;
-	}
-	else if(fileOption == "1x2")
-	{
-		lines = LINES_INT21; cols = COLS_INT21;
-	}
-	else if (fileOption == "2x2")
-	{
-		 lines = LINES_INT22; cols = COLS_INT22;
-	}
-
-	for (int i = 0; i<lines; i++)
-	{
-		for(int j = 0; j<cols; j++)
-		{
-			if(fileOption == "1x1")
-			{
-				if(int11[i][j] >= lower && int11[i][j] <= upper)
-				{
-					int11[i][j] = val;
-					modCount++;
-				}
-			}
-			else if(fileOption == "1x2")
-			{
-				if(int21[i][j] >= lower && int21[i][j] <= upper)
-				{
-					int21[i][j] = val;
-					modCount++;
-				}
-
-			}
-			else if(fileOption == "2x2")
-			{
-				if(int22[i][j] >= lower && int22[i][j] <= upper)
-				{
-					int22[i][j] = val;
-					modCount++;
-				}
-
-			}
-		}
-	}
-	cout<<">>Vals Modified: "<<modCount<<"\n";
-}
-
-void valueModule()
-{
-	string fileOption;
-	cout<< ">>Enter 1x1 or 1x2 or 2x2: ";
-	cin >> fileOption;
-	float upper = 0, lower = 0, val=0;
-	int proceed = 1;
-	while (proceed)
-	{
-		cout << ">>Upper (space) Lower (space) newValue: ";
-		cin >> upper >> lower >> val;
-		if(fileOption == "1x1")
-			valueModuleHelper("1x1",upper, lower, val);
-		else if(fileOption == "1x2")
-			valueModuleHelper("1x2",upper, lower, val);
-		else if(fileOption == "2x2")
-			valueModuleHelper("2x2",upper, lower, val);
-		else
-		{
-			cout<<">>Invalid Option\n";
-			return;
-		}
-		cout<<">>Continue? (0 or 1): ";
-		cin >> proceed;
-	}
-}
-
