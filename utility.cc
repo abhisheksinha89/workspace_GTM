@@ -127,6 +127,19 @@ string findRunPath()
 	return retval;
 }
 
+string getPartBeforeFileName(string gtfoldCommand)
+{
+	unsigned pos = gtfoldCommand.find_last_of(' ');
+	return gtfoldCommand.substr(0, pos);
+
+}
+
+string getFileName(string gtfoldCommand)
+{
+	unsigned pos = gtfoldCommand.find_last_of(' ');
+	return gtfoldCommand.substr(pos+1);
+}
+
 void computeFunction()
 {
 	//implement integration with gtfold
@@ -139,13 +152,18 @@ void computeFunction()
 	
 	//saving arrays to default temp dir which will be used to feed parameter values to gtfold
 	saveArraysToPath(CURRENT_WORKING_DIR+"/temp");	 
-	
-	//making the runpath and integrating with gtfold
-	string gtfoldFileName;
-	cout<<"\n>>Enter File Name: ";
-	cin >> gtfoldFileName;
-	RUNPATH = retval+"/gtmfe "+"-p "+ CURRENT_WORKING_DIR +"/temp " +"./"+gtfoldFileName;
-	//cout<<"\n------"<<RUNPATH;
+
+	// Call gtfold with parameters and link to GTModify
+	//
+	char line[200];
+	string gtfoldCommand;
+	cout<<"Enter GTFold command (-p is set by default): ";
+	getline(cin, gtfoldCommand);
+
+	// creating the RUNPATH
+	//
+	RUNPATH = retval + "/" + getPartBeforeFileName(gtfoldCommand) +" -p "+ CURRENT_WORKING_DIR + "/temp " + "./" + getFileName(gtfoldCommand);
+	//cout<<"\n------"<<RUNPATH<<endl;
 	system(RUNPATH.c_str());
 	
 	return;

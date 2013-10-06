@@ -327,7 +327,7 @@ int main(int argc,char **argv)
 	{
 		
 		cout<<"\n>>ROOT: Run (run), keep (m)odifying, (e)xit, (l)oad, (s)ave, (u)ndo: ";
-		cin >> choice;
+		getline(cin, choice);
 		if(choice == "run")
 		{
 			computeFunction();
