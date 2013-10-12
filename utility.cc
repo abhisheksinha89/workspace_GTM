@@ -117,10 +117,13 @@ string getCurrentWorkingDir()
 	return retval;
 }
 
-string findRunPath()
+string findRunPath(string command)
 {
 	char *val;
-	val = getenv("GTMODIFYRUNPATH");
+	if(command == "gtmfe")
+		val = getenv("GTMODIFYRUNPATH");
+	if(command == "RNAprofile")
+		val = getenv("RNAPROFILERUNPATH");
 	string retval = "";
 	if(val != NULL)
 		retval = val;
@@ -140,32 +143,68 @@ string getFileName(string gtfoldCommand)
 	return gtfoldCommand.substr(pos+1);
 }
 
+string getRunBinary(string gtfoldCommand)
+{
+	unsigned pos = gtfoldCommand.find_first_of(' ');
+	return gtfoldCommand.substr(0, pos);
+}
+
 void computeFunction()
 {
-	//implement integration with gtfold
-	string retval = findRunPath();	
-	if(retval == "")
-	{
-		cout<<"\n>>Environment variable GTMODIFYRUNPATH not set";
-		return;
-	}
-	
-	//saving arrays to default temp dir which will be used to feed parameter values to gtfold
-	saveArraysToPath(CURRENT_WORKING_DIR+"/temp");	 
-
+	string retval;
 	// Call gtfold with parameters and link to GTModify
 	//
 	char line[200];
 	string gtfoldCommand;
-	cout<<"Enter GTFold command (-p is set by default): ";
+	cout<<"Enter GTFold or profiling command (-p and -paramDir is set automatically): ";
 	getline(cin, gtfoldCommand);
 
+	//implement integration with gtfold & Profiling code
+	//
+	if(getRunBinary(gtfoldCommand) == "RNAprofile")
+	{
+		retval = findRunPath("RNAprofile");
+		if(retval == "")
+		{
+			cout<<"\n>>Environment variable RNAPROFILERUNPATH not set";
+			return;
+		}
+	}
+	
+	else if(getRunBinary(gtfoldCommand) == "gtmfe" || getRunBinary(gtfoldCommand) == "gtboltzmann")
+	{
+		retval = findRunPath("gtmfe");	
+		if(retval == "")
+		{
+			cout<<"\n>>Environment variable GTMODIFYRUNPATH not set";
+			return;
+		}
+	}
+
+	else
+	{
+		cout<<"\n>>Command not recognized....supported commands are [gtmfe] [gtboltzmann] & [RNAprofile]";
+		return;
+	}
+
+	//saving arrays to default temp dir which will be used to feed parameter values to gtfold
+	saveArraysToPath(CURRENT_WORKING_DIR+"/temp");	 
+
+	
 	// creating the RUNPATH
 	//
-	RUNPATH = retval + "/" + getPartBeforeFileName(gtfoldCommand) +" -p "+ CURRENT_WORKING_DIR + "/temp " + "./" + getFileName(gtfoldCommand);
-	//cout<<"\n------"<<RUNPATH<<endl;
-	system(RUNPATH.c_str());
-	
+	if(getRunBinary(gtfoldCommand) == "gtmfe" || getRunBinary(gtfoldCommand) == "gtboltzmann")
+	{
+		RUNPATH = retval + "/" + getPartBeforeFileName(gtfoldCommand) +" -p "+ CURRENT_WORKING_DIR + "/temp " + "./" + getFileName(gtfoldCommand);
+		//cout<<"\n------"<<RUNPATH<<endl;
+		system(RUNPATH.c_str());
+	}
+	else if(getRunBinary(gtfoldCommand) == "RNAprofile")
+	{
+		RUNPATH = retval + "/" + getPartBeforeFileName(gtfoldCommand) + " --paramdir=\""+ CURRENT_WORKING_DIR + "/temp\" " + "./" + getFileName(gtfoldCommand);
+		cout<<RUNPATH<<"\n";
+		system(RUNPATH.c_str());
+	}
 	return;
 }
 
