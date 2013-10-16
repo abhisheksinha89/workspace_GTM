@@ -212,48 +212,48 @@ void readCategory()
 {
 	cout<< ">>Categories:\n>>(length) : modify hairpin/bulge/internal energies based on length of loop\n>>(misc) : modify tetraloop and other miscellaneous energies\n>>(internal) : modify 1x1 2x1 2x2 internal loop energies\n>>(stack) : modify stack energies\n>>(terminal) : modify terminal mismatch energies for hairpin and internal loops\n>>(dangle) : modify dangling energies\n>>(value): modify value based params (Beta Version)\n\n";
 	cout<<">>Enter category to Modify: ";
-	cin >> category;
+	getline(cin, category);
 	
 	if (category == "length")
 	{
 		lengthBasedModule();
-		return;
+		
 	}
 	
 	else if (category == "value")
 	{
 		valueModule();
-		return;
+		
 	}
 	
 	else if (category == "misc")
 	{
 		miscModule();
-		return;
+		
 	}
 	
 	else if (category == "dangle")
 	{
 		dangleModule();
-		return;
+		
 	}
 	
 	else if(category == "stack")
 	{
 		stackModule();
-		return;
+		
 	}
 	
 	else if(category == "terminal")
 	{
 		terminalModule();
-		return;
+		
 	}
 	
 	if(category == "internal")
 	{
 		internalModule();
-		return;
+		
 	}
 	
 	else if (category == "exit")
@@ -266,14 +266,14 @@ void readCategory()
 		cout<<">>Wrong Input Format\n";
 		return;
 	}
-		
+	
 }
 
 void saveModule()
 {
 	string savePath;
 	cout<<"\n>>Enter Full Path where you wish to save: ";
-	cin >> savePath;
+	getline(cin, savePath);
 	
 	if(savePath == "0")
 		return;
@@ -442,7 +442,7 @@ void loadModule()
 {
 	string loadPath;
 	cout<<"\n>>Enter the full Path to Load Data files: ";
-	cin >> loadPath;
+	getline(cin, loadPath);
 	if(loadPath == "0")
 		return;
 	if(loadArraysFromPath(loadPath))

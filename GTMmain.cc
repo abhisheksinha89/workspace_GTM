@@ -351,6 +351,7 @@ int main(int argc,char **argv)
 		{
 			undoModule();
 		}
+		cout<<"\n----------------choice: "<<choice<<" ------------\n";
 	}while(choice == "m" || choice == "M" || choice == "run" || choice == "s" || choice == "l" || choice == "u");
 	
 	exitFunction();

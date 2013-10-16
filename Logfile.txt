@@ -132,3 +132,13 @@
 -------------------- SESSION END ---------------------
 
 -------------------- SESSION END ---------------------
+
+-------------------- SESSION END ---------------------
+
+-------------------- SESSION END ---------------------
+[2013-10-16.15:24:26]: <stack_module> Options:a    cbp:  ibp:  xy:  valOption:d  val:1.5  mean:4.59163e-41  stdev:0  ub:0  lb:-8.8913e+33   #mod=256
+
+-------------------- SESSION END ---------------------
+[2013-10-16.15:25:51]: <stack_module> Options:a    cbp:  ibp:  xy:  valOption:d  val:1  mean:4.59163e-41  stdev:0  ub:0  lb:1.1158e-37   #mod=256
+
+-------------------- SESSION END ---------------------
