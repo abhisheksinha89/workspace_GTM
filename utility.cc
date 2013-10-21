@@ -201,7 +201,7 @@ void computeFunction()
 	}
 	else if(getRunBinary(gtfoldCommand) == "RNAprofile")
 	{
-		RUNPATH = retval + "/" + getPartBeforeFileName(gtfoldCommand) + " --paramdir=\""+ CURRENT_WORKING_DIR + "/temp\" " + "./" + getFileName(gtfoldCommand);
+		RUNPATH = retval + "/" + getPartBeforeFileName(gtfoldCommand) + " --paramdir "+ CURRENT_WORKING_DIR + "/temp " + "./" + getFileName(gtfoldCommand);
 		cout<<RUNPATH<<"\n";
 		system(RUNPATH.c_str());
 	}
@@ -305,7 +305,7 @@ int saveArraysToPath(string savePath)
 	{
 		for(int j=0; j<COLS_INT22; j++)
 		{	
-			fprintf(fp, "%f  ",int22[i][j]);
+			fprintf(fp, "\t%.2f",int22[i][j]);
 		}
 		fprintf(fp,"\n");
 	}
@@ -388,7 +388,7 @@ int saveArraysToPath(string savePath)
 	fp = fopen(fileSavePath.c_str(), "w");
 	for(int i=0; i<LINES_TLOOP; i++)
 	{
-		fprintf(fp,"%s\t%f",stringTloop[i].c_str(), tloop[i]);
+		fprintf(fp,"%s\t%.2f",stringTloop[i].c_str(), tloop[i]);
 		fprintf(fp, "\n");
 	}
 	fclose(fp);
