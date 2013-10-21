@@ -318,7 +318,7 @@ int saveArraysToPath(string savePath)
 	{
 		for(int j=0; j<COLS_INT21; j++)
 		{
-			fprintf(fp, "%f\t",int21[i][j]);
+			fprintf(fp, "%.2f\t",int21[i][j]);
 		}
 		fprintf(fp, "\n");
 	}
@@ -331,7 +331,7 @@ int saveArraysToPath(string savePath)
 	{
 		for(int j=0; j<COLS_DANGLE; j++)
 		{
-			fprintf(fp,"%f \t",dangle[i][j]);
+			fprintf(fp,"%.2f \t",dangle[i][j]);
 		}
 		fprintf(fp,"\n");
 	}
@@ -344,7 +344,7 @@ int saveArraysToPath(string savePath)
 	{
 		for(int j=0; j<COLS_INT11; j++)
 		{
-			fprintf(fp, "%f\t",int11[i][j]);
+			fprintf(fp, "%.2f\t",int11[i][j]);
 		}
 		fprintf(fp, "\n");
 	}
@@ -362,7 +362,7 @@ int saveArraysToPath(string savePath)
 			fprintf(fp, "%d\t", (i+1));
 			else
 			//cout<<"---------------- "<<loop[i][j]<<"\n";
-			fprintf(fp, "%f\t",loop[i][j]);
+			fprintf(fp, "%.2f\t",loop[i][j]);
 			//fprintf(fp, "Hello\t");
 		}
 		fprintf(fp, "\n");
@@ -376,7 +376,7 @@ int saveArraysToPath(string savePath)
 	{
 		for(int j=0; j<COLS_STACK; j++)
 		{
-			fprintf(fp, "%f\t",stack[i][j]);
+			fprintf(fp, "%.2f\t",stack[i][j]);
 		}
 		fprintf(fp, "\n");
 	}
@@ -400,7 +400,7 @@ int saveArraysToPath(string savePath)
 	{
 		for(int j=0; j<COLS_TSTACKH; j++)
 		{
-			fprintf(fp, "%f\t",tstackh[i][j]);
+			fprintf(fp, "%.2f\t",tstackh[i][j]);
 		}
 		fprintf(fp, "\n");
 	}
@@ -414,7 +414,7 @@ int saveArraysToPath(string savePath)
 	{
 		for(int j=0; j<COLS_TSTACKI; j++)
 		{
-			fprintf(fp, "%f\t",tstacki[i][j]);
+			fprintf(fp, "%.2f\t",tstacki[i][j]);
 		}
 		fprintf(fp, "\n");
 	}
