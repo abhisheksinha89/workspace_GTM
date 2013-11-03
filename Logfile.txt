@@ -167,3 +167,10 @@
 -------------------- SESSION END ---------------------
 
 -------------------- SESSION END ---------------------
+[2013-11-03.12:16:10]: <length_module> option = h len: 4 valOption: a val:4.600000
+[2013-11-03.12:18:11]: <internal->1x1> Options:a    cbp:  ibp:  xy:  valOption:a  val:5.6  mean:0  stdev:0  ub:0  lb:0   #mod=576
+
+-------------------- SESSION END ---------------------
+[2013-11-03.12:19:15]: <length_module> option = a len: 4 valOption: a val:4.500000
+
+-------------------- SESSION END ---------------------

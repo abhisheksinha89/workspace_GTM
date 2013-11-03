@@ -80,7 +80,7 @@ void lengthBasedModule()
 			logstr = logstr + "len: "+ numBuff;
 			if(len == 0) break;
 			cout<<"Val (a)bsolute, (d)isplacement, (n)ormal, (u)niform distribution: ";
-			cin>>valOption;
+			cin >> valOption;
 			logstr = logstr + " valOption: "+valOption;
 			if(valOption == "n")
 			{
@@ -201,6 +201,7 @@ void lengthBasedModule()
 	//cout<<loop[4][1];
 	//cout<<mean<<" "<<stdev<<" "<<normalDistributionNumberGenerator(mean,stdev);
 
+	getline(cin, valOption);
 }
 
 void dangleModule()
