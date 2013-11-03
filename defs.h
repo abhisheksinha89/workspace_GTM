@@ -153,6 +153,7 @@ extern void loadStack(std::string);
 extern void loadTloop(std::string);
 extern void loadTstackh(std::string);
 extern void loadTstacki(std::string);
+extern void allValuesModule();
 ///////////////////////////////////////////////////////////////////////////////
 //--------------------global declarations of input options--------------------//
 //////////////////////////////////////////////////////////////////////////////

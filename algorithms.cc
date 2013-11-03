@@ -2679,3 +2679,223 @@ void valueModule()
 	}
 }
 
+void allValuesModule()
+{
+	// This module modifies all Turner 99 parameters on the same 4 modify options
+	//
+	string stopper;
+	int modCount = 0;
+	string valOption;
+	float mean, stdev, param1, param2;
+	float val;
+
+	cout<<"Val (a)bsolute, (d)isplacement, (n)ormal, (u)niform distribution: ";
+	cin >> valOption;
+	if(valOption == "n")
+	{
+		cout<<"\n>>Enter stdev: ";
+		cin >> stdev;
+	}
+	else if(valOption == "u")
+	{
+		cout<<"\n>>Enter upperbound (space) lowerbound: ";
+		cin >> param1 >> param2;
+	}
+	else if (valOption == "a" || valOption == "d")
+	{
+		cout<<"\n>>Enter Val: ";
+		cin >> val;
+	}
+	else
+	{
+		cout<<"\n>>Invalid Option";
+		return;
+	}
+
+	// int 22
+	//
+	for(int i=0; i<LINES_INT22; i++)
+		{
+			for(int j=0; j<COLS_INT22; j++)
+			{
+				int22_ORIG[i][j] = int22[i][j];
+
+				if(valOption == "a")
+				int22[i][j] = val;
+				else if(valOption == "d")
+				int22[i][j] += val;
+				else if(valOption == "n")
+				int22[i][j] = normalDistributionNumberGenerator(int22[i][j], stdev);
+				else if(valOption == "u")
+				int22[i][j] = uniformDistributionNumberGenerator(param1, param2);
+			}
+		}
+		modCount = LINES_INT22*COLS_INT22;
+
+	// int 21
+	//
+	for(int i = 0; i<LINES_INT21; i++)
+		{
+			for(int j = 0; j<COLS_INT21; j++)
+			{
+				int21_ORIG[i][j] = int21[i][j];
+
+				if(valOption == "a")
+				int21[i][j] = val;
+				else if(valOption == "d")
+				int21[i][j] += val;
+				else if(valOption == "n")
+				int21[i][j] = normalDistributionNumberGenerator(int21[i][j], stdev);
+				else if(valOption == "u")
+				int21[i][j] = uniformDistributionNumberGenerator(param1, param2);
+			}
+		}
+		
+		modCount += LINES_INT21*COLS_INT21;
+
+	// dangle
+	//
+	for(int i=0; i<LINES_DANGLE; i++)
+			{
+				for(int j=0; j<COLS_DANGLE; j++)
+				{
+					//backup for UNDO
+					dangle_ORIG[i][j] = dangle[i][j];
+					if(valOption == "a")
+					dangle[i][j] = val;
+					else if(valOption == "d")
+					dangle[i][j] += val;
+					else if(valOption == "n")
+					dangle[i][j] = normalDistributionNumberGenerator(dangle[i][j], stdev);
+					else if(valOption == "u")
+					dangle[i][j] = uniformDistributionNumberGenerator(param1, param2);
+				}
+			}
+			modCount += LINES_DANGLE*COLS_DANGLE;
+
+	// int 11
+	//
+	for(int i=0; i<LINES_INT11; i++)
+		{
+			for(int j=0; j<COLS_INT11; j++)
+			{
+				int11_ORIG[i][j] = int11[i][j];
+
+				if(valOption == "a")
+				int11[i][j] = val;
+				else if(valOption == "d")
+				int11[i][j] += val;
+				else if(valOption == "n")
+				int11[i][j] = normalDistributionNumberGenerator(int11[i][j], stdev);
+				else if(valOption == "u")
+				int11[i][j] = uniformDistributionNumberGenerator(param1, param2);
+			}
+		}
+		modCount += LINES_INT11*COLS_INT11;
+
+	// loop
+	//
+	for(int len = 1; len <= 30; len++)
+	{
+		loop_ORIG[len-1][1] = loop[len-1][1];
+		loop_ORIG[len-1][2] = loop[len-1][2];
+		loop_ORIG[len-1][3] = loop[len-1][3];
+		if(valOption == "a"){
+			loop[len - 1][1] = val;
+			loop[len - 1][2] = val;
+			loop[len - 1][3] = val;
+			}
+		else if(valOption == "d")
+		{
+		loop[len - 1][1] += val;
+		loop[len - 1][2] += val;
+		loop[len - 1][3] += val;
+		}
+		else if(valOption == "n")
+		{
+		loop[len -1][1] = normalDistributionNumberGenerator(loop[len-1][1], stdev);
+		loop[len -1][2] = normalDistributionNumberGenerator(loop[len -1][2], stdev);
+		loop[len -1][3] = normalDistributionNumberGenerator(loop[len -1][3], stdev);
+		}
+		else if(valOption == "u")
+		{
+		loop[len -1][1] = uniformDistributionNumberGenerator(param1, param2);
+		loop[len -1][2] = uniformDistributionNumberGenerator(param1, param2);
+		loop[len -1][3] = uniformDistributionNumberGenerator(param1, param2);
+		}
+	}
+	modCount += 90;
+
+	// stack
+	//
+	for(int i=0; i<LINES_STACK; i++)
+		{
+			for(int j=0; j<COLS_STACK; j++)
+			{
+				stack_ORIG[i][j] = stack[i][j];
+				if(valOption == "a")
+				stack[i][j] = val;
+				else if(valOption == "d")
+				stack[i][j] += val;
+				else if(valOption == "n")
+				stack[i][j] = normalDistributionNumberGenerator(stack[i][j], stdev);
+				else if(valOption == "u")
+				stack[i][j] = uniformDistributionNumberGenerator(param1, param2);
+			}//end for
+		}//end for
+
+	modCount += LINES_STACK*COLS_STACK;
+
+	// tloop
+	//
+	for(int i=0; i<LINES_TLOOP; i++)
+	{
+		tloop_ORIG[i] = tloop[i];
+		if(valOption == "a")
+			tloop[i] = val;
+		else if(valOption == "d")
+			tloop[i] += val;
+		else if(valOption == "n")
+			tloop[i] = normalDistributionNumberGenerator(tloop[i], stdev);
+		else if(valOption == "u")
+			tloop[i] = uniformDistributionNumberGenerator(param1, param2);
+	}
+	modCount += LINES_TLOOP;
+
+	// tstackh
+	//
+
+	// tstacki
+	//
+	for(int i=0; i<LINES_STACK; i++)
+		{
+			for(int j=0; j<COLS_STACK; j++)
+			{
+				tstackh_ORIG[i][j] = tstackh[i][j];
+				tstacki_ORIG[i][j] = tstacki[i][j];
+
+					if(valOption == "a")
+					tstacki[i][j] = val;
+					else if(valOption == "d")
+					tstacki[i][j] += val;
+					else if(valOption == "n")
+					tstacki[i][j] = normalDistributionNumberGenerator(tstacki[i][j], stdev);
+					else if(valOption == "u")
+					tstacki[i][j] = uniformDistributionNumberGenerator(param1, param2);
+				
+					if(valOption == "a")
+					tstackh[i][j] = val;
+					else if(valOption == "d")
+					tstackh[i][j] += val;
+					else if(valOption == "n")
+					tstackh[i][j] = normalDistributionNumberGenerator(tstackh[i][j], stdev);
+					else if(valOption == "u")
+					tstackh[i][j] = uniformDistributionNumberGenerator(param1, param2);
+				
+			}//end for
+		}//end for
+
+	getline(cin, stopper);
+}
+
+
