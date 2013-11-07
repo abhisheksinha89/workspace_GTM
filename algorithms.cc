@@ -2,6 +2,7 @@
 using namespace std;
 
 default_random_engine generator(RANDOMSEED);
+std::string capture_return;
 
 void log(char B1, char B2, char B11, char B22, char X1, char X2, char Y1, char Y2)
 {
@@ -201,7 +202,7 @@ void lengthBasedModule()
 	//cout<<loop[4][1];
 	//cout<<mean<<" "<<stdev<<" "<<normalDistributionNumberGenerator(mean,stdev);
 
-	getline(cin, valOption);
+	getline(cin, capture_return);
 }
 
 void dangleModule()
@@ -508,7 +509,7 @@ void dangleModule()
 
 		}
 	//}
-
+	getline(cin, capture_return);
 	//fileLog the query
 	fileLog("dangle_module",option,closingBasePairOption,"",XYOption,queryBasePair,"",queryXY,valOption,val,mean,stdev,param1,param2,modCount);
 }
@@ -2693,7 +2694,7 @@ void allValuesModule()
 	cin >> valOption;
 	if(valOption == "n")
 	{
-		cout<<"\n>>Enter stdev: ";
+		cout<<"\n>>Enter stdev as fraction (like 0.2 implies 20% of original value): ";
 		cin >> stdev;
 	}
 	else if(valOption == "u")
@@ -2725,7 +2726,7 @@ void allValuesModule()
 				else if(valOption == "d")
 				int22[i][j] += val;
 				else if(valOption == "n")
-				int22[i][j] = normalDistributionNumberGenerator(int22[i][j], stdev);
+				int22[i][j] = normalDistributionNumberGenerator(int22[i][j], stdev*int22[i][j]);
 				else if(valOption == "u")
 				int22[i][j] = uniformDistributionNumberGenerator(param1, param2);
 			}
@@ -2745,7 +2746,7 @@ void allValuesModule()
 				else if(valOption == "d")
 				int21[i][j] += val;
 				else if(valOption == "n")
-				int21[i][j] = normalDistributionNumberGenerator(int21[i][j], stdev);
+				int21[i][j] = normalDistributionNumberGenerator(int21[i][j], stdev*int21[i][j]);
 				else if(valOption == "u")
 				int21[i][j] = uniformDistributionNumberGenerator(param1, param2);
 			}
@@ -2766,7 +2767,7 @@ void allValuesModule()
 					else if(valOption == "d")
 					dangle[i][j] += val;
 					else if(valOption == "n")
-					dangle[i][j] = normalDistributionNumberGenerator(dangle[i][j], stdev);
+					dangle[i][j] = normalDistributionNumberGenerator(dangle[i][j], stdev*dangle[i][j]);
 					else if(valOption == "u")
 					dangle[i][j] = uniformDistributionNumberGenerator(param1, param2);
 				}
@@ -2786,7 +2787,7 @@ void allValuesModule()
 				else if(valOption == "d")
 				int11[i][j] += val;
 				else if(valOption == "n")
-				int11[i][j] = normalDistributionNumberGenerator(int11[i][j], stdev);
+				int11[i][j] = normalDistributionNumberGenerator(int11[i][j], stdev*int11[i][j]);
 				else if(valOption == "u")
 				int11[i][j] = uniformDistributionNumberGenerator(param1, param2);
 			}
@@ -2813,9 +2814,9 @@ void allValuesModule()
 		}
 		else if(valOption == "n")
 		{
-		loop[len -1][1] = normalDistributionNumberGenerator(loop[len-1][1], stdev);
-		loop[len -1][2] = normalDistributionNumberGenerator(loop[len -1][2], stdev);
-		loop[len -1][3] = normalDistributionNumberGenerator(loop[len -1][3], stdev);
+		loop[len -1][1] = normalDistributionNumberGenerator(loop[len-1][1], stdev*loop[len-1][1]);
+		loop[len -1][2] = normalDistributionNumberGenerator(loop[len -1][2], stdev*loop[len -1][2]);
+		loop[len -1][3] = normalDistributionNumberGenerator(loop[len -1][3], stdev*loop[len -1][3]);
 		}
 		else if(valOption == "u")
 		{
@@ -2838,7 +2839,7 @@ void allValuesModule()
 				else if(valOption == "d")
 				stack[i][j] += val;
 				else if(valOption == "n")
-				stack[i][j] = normalDistributionNumberGenerator(stack[i][j], stdev);
+				stack[i][j] = normalDistributionNumberGenerator(stack[i][j], stdev*stack[i][j]);
 				else if(valOption == "u")
 				stack[i][j] = uniformDistributionNumberGenerator(param1, param2);
 			}//end for
@@ -2856,7 +2857,7 @@ void allValuesModule()
 		else if(valOption == "d")
 			tloop[i] += val;
 		else if(valOption == "n")
-			tloop[i] = normalDistributionNumberGenerator(tloop[i], stdev);
+			tloop[i] = normalDistributionNumberGenerator(tloop[i], stdev*tloop[i]);
 		else if(valOption == "u")
 			tloop[i] = uniformDistributionNumberGenerator(param1, param2);
 	}
@@ -2879,7 +2880,7 @@ void allValuesModule()
 					else if(valOption == "d")
 					tstacki[i][j] += val;
 					else if(valOption == "n")
-					tstacki[i][j] = normalDistributionNumberGenerator(tstacki[i][j], stdev);
+					tstacki[i][j] = normalDistributionNumberGenerator(tstacki[i][j], stdev*tstacki[i][j]);
 					else if(valOption == "u")
 					tstacki[i][j] = uniformDistributionNumberGenerator(param1, param2);
 				
@@ -2888,13 +2889,14 @@ void allValuesModule()
 					else if(valOption == "d")
 					tstackh[i][j] += val;
 					else if(valOption == "n")
-					tstackh[i][j] = normalDistributionNumberGenerator(tstackh[i][j], stdev);
+					tstackh[i][j] = normalDistributionNumberGenerator(tstackh[i][j], stdev*tstackh[i][j]);
 					else if(valOption == "u")
 					tstackh[i][j] = uniformDistributionNumberGenerator(param1, param2);
 				
 			}//end for
 		}//end for
 
+	cout<<">>All values modified\n";
 	getline(cin, stopper);
 }
 
