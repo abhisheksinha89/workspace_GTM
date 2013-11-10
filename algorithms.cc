@@ -3,6 +3,7 @@ using namespace std;
 
 default_random_engine generator(RANDOMSEED);
 std::string capture_return;
+float MYINFINITY = 10000000;
 
 void log(char B1, char B2, char B11, char B22, char X1, char X2, char Y1, char Y2)
 {
@@ -53,6 +54,10 @@ float uniformDistributionNumberGenerator(float a, float b)
 
 float normalDistributionNumberGenerator(float mean, float stdev)
 {
+	if(mean > MYINFINITY)
+	{
+		return mean;
+	}
 
 	normal_distribution<float> dist(mean, stdev);
 	float retval = dist(generator);
