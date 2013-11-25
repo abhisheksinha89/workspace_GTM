@@ -17,13 +17,13 @@ def foundAndProcessIn(theFile, helixInSet):
 			if(helix.rsplit(' ',1)[0] == helixInSet):
 				file1Frequency.append(float(helix.rsplit(' ',1)[1]))
 				return
-		file1Frequency.append(0.001)
+		file1Frequency.append(1.0)
 	elif (theFile == 'File2'):
 		for helix in file2List:
 			if(helix.rsplit(' ',1)[0] == helixInSet):
 				file2Frequency.append(float(helix.rsplit(' ',1)[1]))
 				return
-		file2Frequency.append(0.001)
+		file2Frequency.append(1.0)
 
 
 def getDivergence():
