@@ -53,7 +53,9 @@ def getDivergence():
 		divergence_12 += (math.log(file1Frequency[i]/file2Frequency[i]))*file1Frequency[i]
 		divergence_21 += (math.log(file2Frequency[i]/file1Frequency[i]))*file2Frequency[i] 
 
-	print divergence_12, divergence_21
+	#print divergence_12
+	#print divergence_21
+	print divergence_12+divergence_21
 
 
 def kulbackLeiblerDivergenceWrapper():
