@@ -250,7 +250,7 @@ void readCategory()
 		
 	}
 	
-	if(category == "internal")
+	else if(category == "internal")
 	{
 		internalModule();
 		
@@ -268,7 +268,7 @@ void readCategory()
 
 	else
 	{
-		cout<<">>Wrong Input Format\n";
+		printf("\n>>Wrong Format");
 		return;
 	}
 	

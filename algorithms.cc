@@ -283,7 +283,8 @@ void dangleModule()
 		cout<<"\n>>(d)etailed query or (a)ll or (0) for root: ";
 		cin >> option;
 		if(option == "0")
-			return;
+		{getline(cin, capture_return);return;}
+			
 		if (option == "a")
 		{
 			//change all values
@@ -308,6 +309,7 @@ void dangleModule()
 			else
 			{
 				cout<<"\n>>Invalid Option";
+				getline(cin, capture_return);
 				return;
 			}
 
@@ -338,7 +340,7 @@ void dangleModule()
 			cin >> closingBasePairOption;
 			if(closingBasePairOption == "c")
 			{
-				cout<<"\n>>Enter closing base-pair (any order), (any) for all combinations: ";
+				cout<<"\n>>Enter closing base-pair in any order, (any) for all combinations: ";
 				cin >> queryBasePair;
 			}
 			else if(closingBasePairOption == "s")
@@ -349,6 +351,7 @@ void dangleModule()
 			else
 			{
 				cout<<"\n>>Invalid Option";
+				getline(cin, capture_return);
 				return;
 			}
 			cout<<"\n>>Any (c)ombination or (s)pecify X1 X2: ";
@@ -366,6 +369,7 @@ void dangleModule()
 			else
 			{
 				cout<<"\n>>Invalid Option";
+				getline(cin, capture_return);
 				return;
 			}
 			cout<<"\n>>Val (a)bsolute, (d)isplacement, (n)ormal, (u)niform distribution: ";
@@ -389,6 +393,7 @@ void dangleModule()
 			else
 			{
 				cout<<"\n>>Invalid Option";
+				getline(cin, capture_return);
 				return;
 			}
 
@@ -641,6 +646,7 @@ void stackModule()
 		else
 		{
 			cout<<"\n>>Invalid Option";
+			getline(cin, capture_return);
 			return;
 		}
 		cout<<"\n>>Any (c)ombination or (s)pecify interior bp: ";
@@ -658,6 +664,7 @@ void stackModule()
 		else
 		{
 			cout<<"\n>>Invalid Option";
+			getline(cin, capture_return);
 			return;
 		}
 		cout<<"\n>>Val (a)bsolute, (d)isplacement, (n)ormal, (u)niform distribution: ";
@@ -682,6 +689,7 @@ void stackModule()
 		else
 		{
 			cout<<"\n>>Invalid Option";
+			getline(cin, capture_return);
 			return;
 		}
 
@@ -839,6 +847,7 @@ void stackModule()
 		else
 		{
 			cout<<"\n>>Invalid Option";
+			getline(cin, capture_return);
 			return;
 		}
 
@@ -862,9 +871,11 @@ void stackModule()
 	}
 	else if(option == "0")
 	{
+		getline(cin, capture_return);
 		return;
 	}
 	fileLog("stack_module",option,closingBasePairOption,"",XYOption,queryBasePair,queryXY,"",valOption,val,mean,stdev,param1,param2,modCount);
+	getline(cin, capture_return);
 }
 
 
@@ -993,6 +1004,7 @@ void helperTerminalModule(string callerOption)
 		else
 		{
 			cout<<"\n>>Invalid Option";
+			getline(cin, capture_return);
 			return;
 		}
 		cout<<"\n>>Any (c)ombination or (s)pecify X1 X2: ";
@@ -1010,6 +1022,7 @@ void helperTerminalModule(string callerOption)
 		else
 		{
 			cout<<"\n>>Invalid Option";
+			getline(cin, capture_return);
 			return;
 		}
 		cout<<"\n>>Val (a)bsolute, (d)isplacement, (n)ormal, (u)niform distribution: ";
@@ -1033,6 +1046,7 @@ void helperTerminalModule(string callerOption)
 		else
 		{
 			cout<<"\n>>Invalid Option";
+			getline(cin, capture_return);
 			return;
 		}
 
@@ -1205,6 +1219,7 @@ void helperTerminalModule(string callerOption)
 		else
 		{
 			cout<<"\n>>Invalid Option";
+			getline(cin, capture_return);
 			return;
 		}
 
@@ -1244,13 +1259,14 @@ void helperTerminalModule(string callerOption)
 	}
 	else if(option == "0")
 	{
+		getline(cin, capture_return);
 		return;
 	}
 	if(callerOption == "h")
 	fileLog("stack->tstackh",option,closingBasePairOption,"",XYOption,queryBasePair,"",queryXY,valOption,val,mean,stdev,param1,param2,modCount);
 	else if(callerOption == "i")
 	fileLog("stack->tstacki",option,closingBasePairOption,"",XYOption,queryBasePair,"",queryXY,valOption,val,mean,stdev,param1,param2,modCount);
-
+	getline(cin, capture_return);
 }
 
 void terminalModule()
@@ -1267,6 +1283,7 @@ void terminalModule()
 		else
 			cout<<"\n>>Invalid Option";
 	}
+	getline(cin, capture_return);
 }
 
 
@@ -1279,7 +1296,7 @@ void miscModule()
 	float val;
 	float mean, stdev, param1, param2;
 	string valOption;
-	cout<< "\n>>Select (t)etraloop or (m)iscloop: ";
+	cout<< "\n>>Select (t)etraloop: ";
 	cin >> option;
 	if(option == "t")
 	{
@@ -1392,16 +1409,14 @@ void miscModule()
 
 	}
 
-	else if(option == "m")
-	{
-		cout<<"\n>>Returning";
-	}
-
 	else
 	{
 		cout<<"\n>>Invalid option";
+		getline(cin, capture_return);
 		return;
 	}
+
+	getline(cin, capture_return);
 }
 
 void internalModule()
@@ -1420,6 +1435,7 @@ void internalModule()
 		else if(option == "3")
 			module2x2();
 	}
+	getline(cin, capture_return);
 }
 
 void module1x1()
